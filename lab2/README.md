@@ -52,5 +52,14 @@
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_20_07.png)
 * Финальный результат получился вот таким:
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_21_02.png)
+3. Закончить установку ОС, поставив grub на первое устройство (sda) и загрузил систему.
+4. Выполнил копирование содержимого раздела /boot с диска sda (ssd1) на диск sdb (ssd2)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_28_35.png)
+5. Выполнил установку grub на второе устройство:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_32_43.png)
+* Результат команды fdisk -l:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_33_40.png)
+* Результат команды lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT:
+
 
 
