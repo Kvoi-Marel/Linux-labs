@@ -197,7 +197,7 @@ vgs
 9. Изменение размера второго раздела диска ssd5
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_43_08.png)
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_43_23.png)
-![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_45_24.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_45_54.png)
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_46_11.png)
 10. Перечитывание таблицы разделов
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_47_46.png)
