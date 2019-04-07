@@ -60,6 +60,29 @@
 * Результат команды fdisk -l:
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_33_40.png)
 * Результат команды lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT:
+    + sda - ssd1
+    + sdb -ssd2
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid%20v2.0_07_04_2019_18_21_30.png)
+* Посмотрел информацию о текущем raid командой cat /proc/mdstat:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_35_39.png)
+Увидел, что активны два raid1 sda2[0] и sdb2[1]
+* Выводы команд: pvs, vgs, lvs, mount:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_36_17.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_36_37.png)
+С помощью этих команд увидел информацию об physical volumes, volume groups, logical volumes, примонтированных устройств.
+# Вывод
+В этом задании научлися устанавливать ОС Linux, настраивать LVM и RAID, а также ознакомился с командами:
+ * lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT
+ * fdisk -l
+ * pvs,lvs,vgs
+ * cat /proc/mdstat
+ * mount
+ * dd if=/dev/xxx of=/dev/yyy
+ * grub-install /dev/XXX 
+В результате получил виртуальную машину с дисками ssd1, ssd2.
+
+
+
 
 
 
