@@ -113,8 +113,152 @@
 Изучил новые команды:
 * sfdisk -d /dev/XXXX | sfdisk /dev/YYY
 * mdadm --manage /dev/md0 --add /dev/YYY
+
 Результат: Удален диск ssd1, добавлен диск ssd3, ssd2 сохранили
 # Задание 3 (Добавление новых дисков и перенос раздела)
+1. Эмулирование отказа диска ssd2 и просмотр состояние дисков RAID
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_24_43.png)
+2. Добавление нового ssd диска
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_27_10.png)
+3. Перенос данных с помощью LVM
+* Копирование файловую таблицу со старого диска на новый
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_28_48.png)
+* Копирование данных /boot на новый диск
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_30_23.png)
+* Перемонтировака /boot на живой диск
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_32_40.png)
+* Установка grub на новый диск
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_33_10.png)
+
+Grub устанавливаем, чтобы могли загрузить ОС с этого диска
+* Создание нового RAID-массива с включением туда только одного нового ssd диска:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_51_49.png)
+* Проверка результата
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_52_50.png)
+
+Появилось /dev/md63
+
+4. Настройка LVM
+* Выполнение команды pvs для просмотра информации о текущих физических томах
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_53_14.png)
+* Создание нового физического тома, включив в него ранее созданный RAID массив:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_53_59.png)
+* Выполнение команд lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT и pvs
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_54_26.png)
+
+К md63 добавился FSTYPE - LVM2_member, так же dev/md63 добавился к результату команды pvs
+* Увеличение размера Volume Group system
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_55_08.png)
+* Выполнение команд
+```
+vgdisplay system -v
+pvs
+vgs
+lvs -a -o+devices
+```
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_55_46.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_15_56_34.png)
+
+LV var,log,root находятся на /dev/md0
+* Перемещение данных со старого диска на новый
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_16_01_11.png)
+* Выполнение команд:
+```
+vgdisplay system -v
+pvs
+vgs
+lvs -a -o+devices
+lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT
+```
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_16_01_46.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_16_02_14.png)
+* Изменение VG, удалив из него диск старого raid.
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_16_03_53.png)
+```
+lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT
+pvs
+vgs
+```
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_16_06_45.png)
+В выводе команды pvs у /dev/md0 исчезли VG и Attr.
+В выводе команды vgs #PV - уменьшилось на 1, VSize, VFree - стали меньше
+* Перемонтировка /boot на второй диск, проверка, что boot не пустой
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_16_07_50.png)
+5. Удаление ssd3 и добавление ssd5,hdd1,hdd2
+
+Тут названия дисков и md поменялись, т.к я сделал клонирования ВМ
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_38_10.png)
+6. Восстановление работы основного RAID массива:
+* Копирование таблицы разделов:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_39_40.png)
+7. Копирование загрузочного раздела /boot с диска ssd4 на ssd5
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_41_24.png)
+8. Установка grub на ssd5
+9. Изменение размера второго раздела диска ssd5
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_43_08.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_43_23.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_45_24.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_46_11.png)
+10. Перечитывание таблицы разделов
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_47_46.png)
+* Добавление нового диска к текущему raid массиву
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_53_12.png)
+* Расширение количество дисков в массиве до 2-х штук:
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_54_58.png)
+11. Увеличение размера раздела на диске ssd4
+* Запуск утилиты для работы с разметкой дисков
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_56_48.png)
+12. Перечитаем таблицу разделов
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_57_49.png)
+13. Расширение размера raid
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_58_43.png)
+
+Размер md127 стал 7.5G
+* Вывод команды pvs
+* Расширение размера PV
+* Вывод команды pvs
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_59_45.png)
+14. Добавление вновь появившееся место VG var,root
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_19_01_24.png)
+15. Перемещение /var/log на новые диски
+* Посмотрел какие имена имеют новые hhd диски
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_07_17.png)
+* Создание RAID массива
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_09_42.png)
+* Создание нового PV на рейде из больших дисков
+* Создание в этом PV группу с названием data
+* Создание логического тома с размером всего свободного пространства и присвоением ему имени var_log
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_17_14.png)
+* Отформатирование созданного раздела в ext4
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_19_14.png)
+16. Перенос данных логов со старого раздела на новый
+* Примонтирование временно нового хранилище логов
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_20_06.png)
+* Выполнение синхронизации разделов
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_27_22.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_27_50.png)
+* Процессы работающие с /var/log
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_28_34.png)
+* Остановка этих процессов
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_29_33.png)
+* Выполнение финальной синхронизации разделов
+* Поменял местами разделы
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_15%20������%20�������_06_04_2019_19_30_48.png)
+17. Правка /etc/fstab
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_�����%20�����_06_04_2019_19_53_13.png)
+18. Проверка всего
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_�����%20�����_06_04_2019_19_54_03.png)
+![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_�����%20�����_06_04_2019_19_54_34.png)
+
+
+
+
+
+
+
+
+
+
 
 
 
