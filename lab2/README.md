@@ -71,7 +71,7 @@
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_36_37.png)
 * С помощью этих команд увидел информацию об physical volumes, volume groups, logical volumes, примонтированных устройств.
 # Вывод
-В этом задании научлися устанавливать ОС Linux, настраивать LVM и RAID, а также ознакомился с командами:
+В этом задании научился устанавливать ОС Linux, настраивать LVM и RAID, а также ознакомился с командами:
  * lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT
  * fdisk -l
  * pvs,lvs,vgs
