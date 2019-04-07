@@ -70,7 +70,7 @@
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_36_17.png)
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_36_37.png)
 * С помощью этих команд увидел информацию об physical volumes, volume groups, logical volumes, примонтированных устройств.
-# Вывод
+## Вывод
 В этом задании научился устанавливать ОС Linux, настраивать LVM и RAID, а также ознакомился с командами:
  * lsblk -o NAME,SIZE,FSTYPE,TYPE,MOUNTPOINT
  * fdisk -l
@@ -80,7 +80,7 @@
  * dd if=/dev/xxx of=/dev/yyy
  * grub-install /dev/XXX 
 * В результате получил виртуальную машину с дисками ssd1, ssd2.
-## Задание 2 (Эмуляция отказа одного из дисков)
+# Задание 2 (Эмуляция отказа одного из дисков)
 1. Удаление диска ssd1 в свойствах машины, проверка работоспособности виртуальной машины.
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images2/VirtualBox_����%20Raid%20v2.0_06_04_2019_09_25_35.png) 
 2. Проверка статуса RAID-массива cat /proc/mdstat
@@ -102,7 +102,7 @@
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images2/VirtualBox_lab%202.2_07_04_2019_21_49_25.png)
 7. Перезагрузка ВМ и проверка, что все работает
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images2/VirtualBox_������%20�����%20����������_06_04_2019_11_18_44.png)
-# Вывод
+## Вывод
 В этом задании научился:
 * Удалять диск ssd1
 * Проверять статус RAID-массива
