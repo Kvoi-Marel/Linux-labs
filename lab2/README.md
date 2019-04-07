@@ -180,6 +180,7 @@ pvs
 vgs
 ```
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_16_06_45.png)
+
 В выводе команды pvs у /dev/md0 исчезли VG и Attr.
 В выводе команды vgs #PV - уменьшилось на 1, VSize, VFree - стали меньше
 * Перемонтировка /boot на второй диск, проверка, что boot не пустой
