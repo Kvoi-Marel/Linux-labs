@@ -20,10 +20,10 @@
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_05_12.png)
 * Выбрал пункт "Configure software RAID"
     + Create MD device
-    + Software RAID device type: Выберите зеркальный массив
-    + Active devices for the RAID XXXX array: Выбрать оба диска
-    + Spare devices: Оставить 0 по умолчанию
-    + Active devices for the RAID XX array: выбрать разделы, которые вы создавали под raid
+    + Software RAID device type: Выберал зеркальный массив
+    + Active devices for the RAID XXXX array: Выбрал оба диска
+    + Spare devices: Оставил 0 по умолчанию
+    + Active devices for the RAID XX array: Выбрал разделы, которые создавал под raid
     + Finish
 * В итоге получил: 
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images/VirtualBox_Raid_26_03_2019_17_12_17.png)
