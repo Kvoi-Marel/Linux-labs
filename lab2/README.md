@@ -189,6 +189,7 @@ vgs
 
 Тут названия дисков и md поменялись, т.к я сделал клонирования ВМ
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_38_10.png)
+
 6. Восстановление работы основного RAID массива:
 * Копирование таблицы разделов:
 ![alt-текст](https://github.com/Kindface/Linux-labs/blob/master/lab2/images3/VirtualBox_Hard_06_04_2019_18_39_40.png)
