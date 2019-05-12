@@ -1,5 +1,3 @@
 #!/bin/bash
-ls part1
-ls ../john/Documents/part2
-ls ../john/Desktop/part3
+echo "Flag suzen14 is: $(ls part1 ../john/*/* |egrep '^[0-9a-zA-Z]{9,10}' | tr -d '\n')"
 
