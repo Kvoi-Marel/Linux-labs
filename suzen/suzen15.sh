@@ -1,2 +1,2 @@
 #!/bin/bash
-pwd
+echo "Flag suzen15 is: $(pwd | awk -F/ '{print $4}')"
